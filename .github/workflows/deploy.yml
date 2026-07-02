@@ -19,9 +19,8 @@ jobs:
           host: ${{ secrets.VPS_IP }}
           username: sysmonadmin
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "."
+          source: "*,!.git,!.github,!node_modules,!venv"
           target: "/home/sysmonadmin/proyecto-ti"
-          exclude: ".git,.github,node_modules,venv"
 
       - name: Execute deployment script on VPS
         uses: appleboy/ssh-action@master
