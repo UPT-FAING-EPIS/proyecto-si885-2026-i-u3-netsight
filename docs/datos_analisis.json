@@ -1,0 +1,77 @@
+{
+    "fecha_analisis": "2026-07-01T23:37:47.644133",
+    "total_registros_red": 4357,
+    "total_registros_dns": 3485,
+    "resumen_infraestructura": {
+        "top_paises": {
+            "Estados Unidos": 1955,
+            "Rusia": 450,
+            "Perú": 443,
+            "LAN": 432,
+            "China": 431
+        },
+        "top_procesos": {
+            "chrome.exe": 1710,
+            "msedge.exe": 656,
+            "discord.exe": 430,
+            "teams.exe": 340,
+            "pycharm64.exe": 301
+        },
+        "top_puertos": {
+            "443": 2652,
+            "80": 651,
+            "53": 421,
+            "8080": 346,
+            "1514": 87
+        }
+    },
+    "modelo_predictivo": {
+        "coeficiente_pendiente": 1.0241935483870954,
+        "coeficiente_interseccion": 125.18548387096777,
+        "ecuacion": "Eventos = 1.0242 * Dia_Index + 125.1855",
+        "proyecciones": [
+            {
+                "fecha": "2026-07-02",
+                "proyeccion": 157,
+                "limite_inferior": 104,
+                "limite_superior": 209
+            },
+            {
+                "fecha": "2026-07-03",
+                "proyeccion": 158,
+                "limite_inferior": 105,
+                "limite_superior": 210
+            },
+            {
+                "fecha": "2026-07-04",
+                "proyeccion": 159,
+                "limite_inferior": 107,
+                "limite_superior": 211
+            },
+            {
+                "fecha": "2026-07-05",
+                "proyeccion": 160,
+                "limite_inferior": 108,
+                "limite_superior": 212
+            },
+            {
+                "fecha": "2026-07-06",
+                "proyeccion": 161,
+                "limite_inferior": 109,
+                "limite_superior": 214
+            },
+            {
+                "fecha": "2026-07-07",
+                "proyeccion": 162,
+                "limite_inferior": 110,
+                "limite_superior": 215
+            },
+            {
+                "fecha": "2026-07-08",
+                "proyeccion": 163,
+                "limite_inferior": 111,
+                "limite_superior": 216
+            }
+        ]
+    }
+}

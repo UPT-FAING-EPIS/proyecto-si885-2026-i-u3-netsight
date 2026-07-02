@@ -23,14 +23,14 @@ Actualmente, la administración del parque informático académico opera de form
 
 La organización física del proyecto refleja fielmente la separación de responsabilidades y la modularidad de su arquitectura distribuida:
 
-*   [**`/infrastructure`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/infrastructure): Contiene el esquema SQL relacional ([`schema.sql`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/infrastructure/schema.sql)), los scripts para levantar la infraestructura de servidores mediante Terraform (`/terraform`) y el despliegue automático del clúster wazuh ([`deploy_wazuh.sh`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/infrastructure/deploy_wazuh.sh)).
-*   [**`/server`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/server): El backend en Python. Implementado con **FastAPI** ([`main.py`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/server/app/main.py)), cuenta con modelos relacionales ORM (SQLAlchemy) y la lógica de negocio de los procesos ETL (`/app/etl`):
-    *   [`engine.py`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/server/app/etl/engine.py): Pipeline de extracción e inserción incremental en lote cruzando logs de OpenSearch y geolocalización MaxMind.
-    *   [`sync_agents.py`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/server/app/etl/sync_agents.py): Sincronización del estado "Activo/Inactivo" de los agentes Wazuh.
-    *   [`housekeeping.py`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/server/app/etl/housekeeping.py): Purga periódica para mantener bajo control el tamaño físico de la BD.
-*   [**`/dashboard`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/dashboard): El portal web administrativo construido en **Next.js 15 (App Router)** y **React 19**.
-*   [**`/installer`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/installer): Instalador cliente nativo para Windows desarrollado en **C# con WPF (.NET)** ([`NetworkMonitorInstaller.sln`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/installer/NetworkMonitorInstaller.sln)), diseñado para un despliegue silencioso en un clic.
-*   [**`/docs`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/docs): Documentación del proyecto, incluyendo manuales técnicos detallados y los informes académicos de fases (FD01-FD05).
+*   [**`/infrastructure`**](../infrastructure): Contiene el esquema SQL relacional ([`schema.sql`](../infrastructure/schema.sql)), los scripts para levantar la infraestructura de servidores mediante Terraform (`/terraform`) y el despliegue automático del clúster wazuh ([`deploy_wazuh.sh`](../infrastructure/deploy_wazuh.sh)).
+*   [**`/server`**](../server): El backend en Python. Implementado con **FastAPI** ([`main.py`](../server/app/main.py)), cuenta con modelos relacionales ORM (SQLAlchemy) y la lógica de negocio de los procesos ETL (`/app/etl`):
+    *   [`engine.py`](../server/app/etl/engine.py): Pipeline de extracción e inserción incremental en lote cruzando logs de OpenSearch y geolocalización MaxMind.
+    *   [`sync_agents.py`](../server/app/etl/sync_agents.py): Sincronización del estado "Activo/Inactivo" de los agentes Wazuh.
+    *   [`housekeeping.py`](../server/app/etl/housekeeping.py): Purga periódica para mantener bajo control el tamaño físico de la BD.
+*   [**`/dashboard`**](../dashboard): El portal web administrativo construido en **Next.js 15 (App Router)** y **React 19**.
+*   [**`/installer`**](../installer): Instalador cliente nativo para Windows desarrollado en **C# con WPF (.NET)** ([`NetworkMonitorInstaller.sln`](../installer/NetworkMonitorInstaller.sln)), diseñado para un despliegue silencioso en un clic.
+*   [**`/docs`**](.): Documentación del proyecto, incluyendo manuales técnicos detallados y los informes académicos de fases (FD01-FD05).
 
 ---
 

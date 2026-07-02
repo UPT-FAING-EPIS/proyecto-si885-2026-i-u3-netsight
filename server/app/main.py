@@ -220,6 +220,31 @@ async def ejecutar_housekeeping():
         raise HTTPException(status_code=500, detail=f"Error en housekeeping: {str(e)}")
 
 
+@app.get("/api/etl/analysis")
+async def obtener_datos_analisis():
+    """Retorna los resultados del análisis exploratorio y predictivo."""
+    # Intentar cargar datos de análisis generados
+    analysis_path = r"c:\Users\Admin\Desktop\LabsNegocios\proyecto-si885-2026-i-u3-netsight\docs\datos_analisis.json"
+    if not os.path.exists(analysis_path):
+        # Intentar ejecutar el análisis si no existe
+        try:
+            from .etl.exploratory_analysis import main as run_analysis
+            run_analysis()
+        except Exception as e:
+            raise HTTPException(
+                status_code=404, 
+                detail=f"Archivo de análisis no encontrado y falló auto-ejecución: {str(e)}"
+            )
+            
+    if not os.path.exists(analysis_path):
+        raise HTTPException(status_code=404, detail="Archivo de análisis no encontrado en el servidor.")
+        
+    with open(analysis_path, 'r', encoding='utf-8') as f:
+        import json
+        data = json.load(f)
+    return data
+
+
 # ── Endpoints: Estadísticas (para Dashboard) ────────────────────────────────
 
 @app.get("/api/stats/")

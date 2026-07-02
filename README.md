@@ -78,16 +78,16 @@ graph TD
 
 ## 📦 Estructura del Repositorio
 
-*   [**`/infrastructure`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/infrastructure): Scripts de infraestructura y base de datos.
-    *   [`/terraform`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/infrastructure/terraform): Código para desplegar la máquina virtual y red en Microsoft Azure.
-    *   [`schema.sql`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/infrastructure/schema.sql): Esquema relacional inicial para PostgreSQL.
-    *   [`deploy_wazuh.sh`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/infrastructure/deploy_wazuh.sh): Script Bash para auto-configurar el clúster de Wazuh, base de datos y dependencias en el servidor.
-*   [**`/server`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/server): Código del backend FastAPI.
-    *   [`/app/etl`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/server/app/etl): Lógica del motor ETL (`engine.py`), sincronización de estados (`sync_agents.py`) y limpieza (`housekeeping.py`).
-    *   [`main.py`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/server/app/main.py): Definición de los endpoints REST de administración y ejecución de jobs.
-*   [**`/dashboard`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/dashboard): Frontend SPA en Next.js 15 para la administración e integración analítica.
-*   [**`/installer`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/installer): Instalador cliente en C# WPF para desplegar la telemetría en laboratorios en un clic.
-*   [**`/docs`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/docs): Informes técnicos formales y blueprints de diseño analítico.
+*   [**`/infrastructure`**](./infrastructure): Scripts de infraestructura y base de datos.
+    *   [`/terraform`](./infrastructure/terraform): Código para desplegar la máquina virtual y red en Microsoft Azure.
+    *   [`schema.sql`](./infrastructure/schema.sql): Esquema relacional inicial para PostgreSQL.
+    *   [`deploy_wazuh.sh`](./infrastructure/deploy_wazuh.sh): Script Bash para auto-configurar el clúster de Wazuh, base de datos y dependencias en el servidor.
+*   [**`/server`**](./server): Código del backend FastAPI.
+    *   [`/app/etl`](./server/app/etl): Lógica del motor ETL (`engine.py`), sincronización de estados (`sync_agents.py`) y limpieza (`housekeeping.py`).
+    *   [`main.py`](./server/app/main.py): Definición de los endpoints REST de administración y ejecución de jobs.
+*   [**`/dashboard`**](./dashboard): Frontend SPA en Next.js 15 para la administración e integración analítica.
+*   [**`/installer`**](./installer): Instalador cliente en C# WPF para desplegar la telemetría en laboratorios en un clic.
+*   [**`/docs`**](./docs): Informes técnicos formales y blueprints de diseño analítico.
 
 ---
 
@@ -96,16 +96,16 @@ graph TD
 ### 1. Servidor e Infraestructura (Azure + Terraform)
 1. Instalar Terraform y Azure CLI en su máquina local.
 2. Iniciar sesión en Azure: `az login`.
-3. Navegar a [**`/infrastructure/terraform`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/infrastructure/terraform).
+3. Navegar a [**`/infrastructure/terraform`**](./infrastructure/terraform).
 4. Inicializar y aplicar el aprovisionamiento:
    ```bash
    terraform init
    terraform apply -auto-approve
    ```
-5. Tras completarse, el script de inicialización [`deploy_wazuh.sh`](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/infrastructure/deploy_wazuh.sh) configurará de forma automatizada los servicios en la VM.
+5. Tras completarse, el script de inicialización [`deploy_wazuh.sh`](./infrastructure/deploy_wazuh.sh) configurará de forma automatizada los servicios en la VM.
 
 ### 2. Backend FastAPI
-1. Ingresar a [**`/server`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/server).
+1. Ingresar a [**`/server`**](./server).
 2. Crear y activar un entorno virtual:
    ```bash
    python -m venv venv
@@ -118,7 +118,7 @@ graph TD
    ```
 
 ### 3. Frontend Next.js
-1. Ingresar a [**`/dashboard`**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/dashboard).
+1. Ingresar a [**`/dashboard`**](./dashboard).
 2. Instalar paquetes y ejecutar en modo desarrollo:
    ```bash
    npm install
@@ -127,13 +127,34 @@ graph TD
 
 ---
 
+## 📊 Inventario de Artefactos Analíticos (EDA & BI)
+
+Se ha creado un conjunto completo de artefactos para el almacenamiento, procesamiento y análisis exploratorio/predictivo del tráfico de red:
+
+### 1. Modelado de Datos y Análisis Predictivo
+*   [**`exploratory_analysis.py`**](./server/app/etl/exploratory_analysis.py) [Python Script]: Script de Python que conecta con la base de datos relacional para cargar datos e implementar un modelo predictivo de regresión lineal. Proyecta el tráfico diario de red e inyecta la información en un libro de Excel y JSON.
+*   [**`reporte_analisis_exploratorio.xlsx`**](./docs/reporte_analisis_exploratorio.xlsx) [Excel WorkBook]: Libro consolidado con pestañas dedicadas al histórico de volumen diario, proyecciones a 7 días con límites de confianza, uso de aplicaciones (procesos) y resumen general de KPIs.
+*   [**`datos_analisis.json`**](./docs/datos_analisis.json) [JSON Metadata]: Archivo JSON estructurado con la ecuación paramétrica del modelo predictivo y las coordenadas de proyección para consumo dinámico.
+*   [**`schema.sql`**](./infrastructure/schema.sql) [SQL Schema]: Archivo SQL con las llaves, relaciones, vistas desnormalizadas e índices de PostgreSQL.
+
+### 2. Gráficos y Visualizaciones Generadas
+*   [**`plot_proyeccion_trafico.png`**](./docs/plot_proyeccion_trafico.png) [PNG Image]: Gráfico de la serie de tiempo histórica de telemetría de red, línea de tendencia ajustada y proyecciones de volumen diario con un intervalo de confianza al 95%.
+*   [**`plot_distribucion_protocolo.png`**](./docs/plot_distribucion_protocolo.png) [PNG Image]: Gráfico de barras con la distribución porcentual de protocolos en la red de laboratorios.
+*   [**`plot_top_procesos.png`**](./docs/plot_top_procesos.png) [PNG Image]: Histograma de procesos que revela los ejecutables más activos.
+
+### 3. Publicación en la Nube (Power BI Service)
+*   **Enlace de Publicación Web Directa:** [Dashboard Interactivo NetSight - Power BI](https://app.powerbi.com/view?r=eyJrIjoiYTNkOWQ2OTktODYzMS00NGNkLWJjZGItYjg0ZGI2MGY1OTQ0IiwidCI6Ijg1MWIxNWUyLTlkMzMtNDBiMi1hYzkyLTcxMDNhYWM5ZThiZCIsImMiOjR9)  
+    *El tablero consume la telemetría depurada a través de las vistas estructuradas de PostgreSQL mediante DirectQuery, permitiendo el desglose interactivo de ciberseguridad, uso académico y capacidad de red.*
+
+---
+
 ## 📚 Documentación Técnica de Fases (Fichas Entregables)
 
 Para detalles profundos y especificaciones de ingeniería, consulte los entregables formales de fase:
 
-1.  [**FD01: Informe de Factibilidad**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/docs/FD01-EPIS-Informe%20de%20Factibilidad.md) - Análisis técnico, de riesgos y retorno financiero.
-2.  [**FD02: Informe de Visión**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/docs/FD02-EPIS-Informe%20de%20Vision.md) - Perfil de involucrados, limitaciones y alcance.
-3.  [**FD03: Especificación de Requerimientos**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/docs/FD03_Requerimientos.md) - Casos de uso de negocio y requerimientos funcionales/no funcionales.
-4.  [**FD04: Informe de Arquitectura de Software**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/docs/FD04-EPIS-Informe%20Arquitectura%20de%20Software.md) - Tácticas de disponibilidad y diagramas físicos/lógicos.
-5.  [**FD05: Informe de Proyecto Final**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/docs/FD05-EPIS-Informe%20ProyectoFinal.md) - Conclusiones, métricas y resultados de las pruebas de integración.
-6.  [**Resumen Técnico General del Proyecto**](file:///c:/Users/Admin/Desktop/LabsNegocios/proyecto-si885-2026-i-u3-netsight/docs/resumen_general.md) - Auditoría a profundidad de cada componente y oportunidades de mejora del software.
+1.  [**FD01: Informe de Factibilidad**](./docs/FD01-EPIS-Informe%20de%20Factibilidad.md) - Análisis técnico, de riesgos y retorno financiero.
+2.  [**FD02: Informe de Visión**](./docs/FD02-EPIS-Informe%20de%20Vision.md) - Perfil de involucrados, limitaciones y alcance.
+3.  [**FD03: Especificación de Requerimientos**](./docs/FD03_Requerimientos.md) - Casos de uso de negocio y requerimientos funcionales/no funcionales.
+4.  [**FD04: Informe de Arquitectura de Software**](./docs/FD04-EPIS-Informe%20Arquitectura%20de%20Software.md) - Tácticas de disponibilidad y diagramas físicos/lógicos.
+5.  [**FD05: Informe de Proyecto Final**](./docs/FD05-EPIS-Informe%20ProyectoFinal.md) - Conclusiones, métricas y resultados de las pruebas de integración.
+6.  [**Resumen Técnico General del Proyecto**](./docs/resumen_general.md) - Auditoría a profundidad de cada componente y oportunidades de mejora del software.
