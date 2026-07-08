@@ -30,20 +30,28 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            # Cargar variables de entorno (como NVM para npm/pm2)
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            source ~/.bashrc || true
+            export PATH=$PATH:/usr/local/bin:/usr/bin
+            
             cd /root/proyecto-ti
             
             # Setup Dashboard (Next.js)
             cd dashboard
             npm install
             npm run build
-            pm2 restart nextjs-dashboard
+            pm2 restart nextjs-dashboard || pm2 start npm --name "nextjs-dashboard" -- start
             
             # Setup ETL & API (Python)
             cd ../server
-            # Solo instala dependencias si es necesario (ya existe el venv)
+            if [ ! -d "venv" ]; then
+                python3 -m venv venv
+            fi
             venv/bin/pip install -r requirements.txt
-            pm2 restart fastapi-backend
-            pm2 restart etl-engine
+            pm2 restart fastapi-backend || pm2 start "venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000" --name "fastapi-backend"
+            pm2 restart etl-engine || pm2 start "venv/bin/python app/etl/worker.py" --name "etl-engine"
             
             # Save PM2 state
             pm2 save
