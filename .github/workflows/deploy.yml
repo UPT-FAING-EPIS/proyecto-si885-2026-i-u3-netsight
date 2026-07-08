@@ -30,7 +30,16 @@ jobs:
           username: root
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Cargar variables de entorno (como NVM para npm/pm2)
+            # 1. Instalar dependencias base del sistema si faltan (para evitar errores "command not found")
+            apt-get update -y
+            apt-get install -y python3-venv nodejs npm
+            
+            # 2. Asegurarse de que PM2 esté instalado globalmente
+            if ! command -v pm2 &> /dev/null; then
+                npm install -g pm2
+            fi
+            
+            # 3. Cargar variables de entorno (por si acaso se usó NVM antes)
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             source ~/.bashrc || true
